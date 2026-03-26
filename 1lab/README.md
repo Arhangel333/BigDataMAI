@@ -154,4 +154,5 @@ ORDER BY total_revenue DESC;
 
 ## Автор
 [Ваше имя]
+- GitHub: [@username](https://github.com/Arhangel333)
 ```
