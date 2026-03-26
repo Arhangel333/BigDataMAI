@@ -20,7 +20,7 @@ INSERT INTO
         customer_pet_type,
         customer_pet_name,
         customer_pet_breed,
-        pet_category
+        pet_category --Дублируем так как нужно здесь тоже
     )
     SELECT DISTINCT ON (sale_customer_id)
         sale_customer_id::INTEGER,
@@ -33,7 +33,7 @@ INSERT INTO
         customer_pet_type::VARCHAR(20),
         customer_pet_name::VARCHAR(100),
         customer_pet_breed::VARCHAR(100),
-        pet_category::VARCHAR(50)
+        pet_category::VARCHAR(50) --Дублируем так как нужно здесь тоже
     FROM mock_data
     WHERE sale_customer_id IS NOT NULL
     ON CONFLICT DO NOTHING;
@@ -73,7 +73,7 @@ INSERT INTO
         product_description,
         product_rating,
         product_reviews,
-        pet_category,
+        pet_category, --Дублируем так как нужно здесь тоже
         product_release_date,
         product_expiry_date
     )
@@ -180,7 +180,6 @@ ON mock_data (supplier_name, store_name);
 
 
 
--- Исправленный supplier_store
 INSERT INTO supplier_store (supplier_id, store_id)
 SELECT DISTINCT
     sup.supplier_id,

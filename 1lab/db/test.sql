@@ -1,3 +1,4 @@
+-- Этим я смотрел какие данные лежат в полях таблиц 
 \set field product_expiry_date
 
 select DISTINCT 
@@ -24,25 +25,18 @@ FROM mock_data
 ORDER BY len ASC
 LIMIT 10;
 
-select DISTINCT
-id,
-supplier_name,
-store_name, 
-seller_first_name
-FROM mock_data 
-WHERE seller_first_name IS NULL
-ORDER BY id ASC
-LIMIT 10;
-
+--Это я проверил что таблицы созданы в БД после DDL
 \dt
 
-SELECT 
+
+-- Это я смотрел что с размерами таблиц и почему комп виснет при их заполнении потом подправил что-то и заработало
+/* SELECT 
 COUNT(*) FROM (SELECT DISTINCT 
         supplier_name, 
         store_name 
     FROM mock_data 
     WHERE supplier_name IS NOT NULL 
-      AND store_name IS NOT NULL);
+      AND store_name IS NOT NULL); */
 
 
 
@@ -69,26 +63,7 @@ HAVING
     OR COUNT(DISTINCT store_phone) > 1 
     OR COUNT(DISTINCT store_email) > 1
 ORDER BY total_rows DESC; */
-
-SELECT 
-COUNT(id) FROM mock_data;  
-
-SELECT 
-COUNT(customer_id) FROM customer;      
-     
-SELECT 
-COUNT(product_id) FROM product;        
-SELECT 
-COUNT(sale_id) FROM sale;           
-SELECT 
-COUNT(seller_id) FROM seller;          
- SELECT 
-COUNT(store_name) FROM store;          
- SELECT 
-COUNT(supplier_id) FROM supplier; 
-
- SELECT 
-COUNT(DISTINCT (supplier_name, store_name)) FROM mock_data;  
+ 
 /* 
 EXPLAIN (ANALYZE, BUFFERS, TIMING)
 SELECT DISTINCT
@@ -106,6 +81,8 @@ JOIN store st ON st.store_phone = m.store_phone
 JOIN supplier sup ON sup.supplier_phone = m.supplier_phone; */
 
 
+
+-- Этим я проверяю таблицы после DML
 
 SELECT 
     'customer' as table_name, COUNT(*) FROM customer

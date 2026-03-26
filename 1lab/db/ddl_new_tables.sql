@@ -62,7 +62,7 @@ CREATE table
         customer_pet_type VARCHAR(20),
         customer_pet_name VARCHAR(100),
         customer_pet_breed VARCHAR(100),
-        pet_category VARCHAR(50)
+        pet_category VARCHAR(50) --Дублируем так как нужно здесь тоже
     );
 
 CREATE table
