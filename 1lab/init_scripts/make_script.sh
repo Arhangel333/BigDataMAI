@@ -7,6 +7,8 @@ csv_dir="$2"
 
 #echo ""$1" "$2""
 
+echo "DROP TABLE IF EXISTS mock_data;"
+
 for file in "$csv_dir"/*.csv; do
     #echo ""$script_file" "$file""
     "$script_file" "$file"

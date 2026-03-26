@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS mock_data;
 CREATE table mock_data(
 id TEXT,
 customer_first_name TEXT,
