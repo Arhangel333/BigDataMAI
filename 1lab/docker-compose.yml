@@ -2,8 +2,8 @@ services:
   postgres:
     image: postgres:15
     volumes: 
-      - .:/data
-      - ./script_me.sh:/docker-entrypoint-initdb.d/script_me.sh
+      - ./container:/data
+      - ./container/script_me.sh:/docker-entrypoint-initdb.d/script_me.sh
     container_name: db_sql
     env_file:
       - envfile.env
