@@ -1,142 +1,101 @@
-Spark версия: 3.5.0
-❌ Ошибка: An error occurred while calling o26.jdbc.
-: java.lang.ClassNotFoundException: org.postgresql.Driver
-	at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
-	at org.apache.spark.sql.execution.datasources.jdbc.DriverRegistry$.register(DriverRegistry.scala:46)
-	at org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions.$anonfun$driverClass$1(JDBCOptions.scala:103)
-	at org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions.$anonfun$driverClass$1$adapted(JDBCOptions.scala:103)
-	at scala.Option.foreach(Option.scala:407)
-	at org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions.<init>(JDBCOptions.scala:103)
-	at org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions.<init>(JDBCOptions.scala:41)
-	at org.apache.spark.sql.execution.datasources.jdbc.JdbcRelationProvider.createRelation(JdbcRelationProvider.scala:34)
-	at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:346)
-	at org.apache.spark.sql.DataFrameReader.loadV1Source(DataFrameReader.scala:229)
-	at org.apache.spark.sql.DataFrameReader.$anonfun$load$2(DataFrameReader.scala:211)
-	at scala.Option.getOrElse(Option.scala:189)
-	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:211)
-	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:172)
-	at org.apache.spark.sql.DataFrameReader.jdbc(DataFrameReader.scala:249)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
-	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
-	at py4j.Gateway.invoke(Gateway.java:282)
-	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
-	at py4j.commands.CallCommand.execute(CallCommand.java:79)
-	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
-	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
-	at java.base/java.lang.Thread.run(Thread.java:833)
+============================================================
+ПРЕОБРАЗОВАНИЕ В МОДЕЛЬ ЗВЕЗДА
+============================================================
 
+1. Читаем mock_data...
+   Загружено 10000 строк
 
-Возможно, таблица mock_data еще не создана.
-Попробуем создать тестовую таблицу...
-Traceback (most recent call last):
-  File "/home/jovyan/work/test_postgres.py", line 21, in <module>
-    df = spark.read.jdbc(jdbc_url, "mock_data", properties=props)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/spark/python/lib/pyspark.zip/pyspark/sql/readwriter.py", line 946, in jdbc
-  File "/usr/local/spark/python/lib/py4j-0.10.9.7-src.zip/py4j/java_gateway.py", line 1322, in __call__
-  File "/usr/local/spark/python/lib/pyspark.zip/pyspark/errors/exceptions/captured.py", line 179, in deco
-  File "/usr/local/spark/python/lib/py4j-0.10.9.7-src.zip/py4j/protocol.py", line 326, in get_return_value
-py4j.protocol.Py4JJavaError: An error occurred while calling o26.jdbc.
-: java.lang.ClassNotFoundException: org.postgresql.Driver
-	at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
-	at org.apache.spark.sql.execution.datasources.jdbc.DriverRegistry$.register(DriverRegistry.scala:46)
-	at org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions.$anonfun$driverClass$1(JDBCOptions.scala:103)
-	at org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions.$anonfun$driverClass$1$adapted(JDBCOptions.scala:103)
-	at scala.Option.foreach(Option.scala:407)
-	at org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions.<init>(JDBCOptions.scala:103)
-	at org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions.<init>(JDBCOptions.scala:41)
-	at org.apache.spark.sql.execution.datasources.jdbc.JdbcRelationProvider.createRelation(JdbcRelationProvider.scala:34)
-	at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:346)
-	at org.apache.spark.sql.DataFrameReader.loadV1Source(DataFrameReader.scala:229)
-	at org.apache.spark.sql.DataFrameReader.$anonfun$load$2(DataFrameReader.scala:211)
-	at scala.Option.getOrElse(Option.scala:189)
-	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:211)
-	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:172)
-	at org.apache.spark.sql.DataFrameReader.jdbc(DataFrameReader.scala:249)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
-	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
-	at py4j.Gateway.invoke(Gateway.java:282)
-	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
-	at py4j.commands.CallCommand.execute(CallCommand.java:79)
-	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
-	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
-	at java.base/java.lang.Thread.run(Thread.java:833)
+   Доступные колонки:
+   - id
+   - customer_first_name
+   - customer_last_name
+   - customer_age
+   - customer_email
+   - customer_country
+   - customer_postal_code
+   - customer_pet_type
+   - customer_pet_name
+   - customer_pet_breed
+   - seller_first_name
+   - seller_last_name
+   - seller_email
+   - seller_country
+   - seller_postal_code
+   - product_name
+   - product_category
+   - product_price
+   - product_quantity
+   - sale_date
+   - sale_customer_id
+   - sale_seller_id
+   - sale_product_id
+   - sale_quantity
+   - sale_total_price
+   - store_name
+   - store_location
+   - store_city
+   - store_state
+   - store_country
+   - store_phone
+   - store_email
+   - pet_category
+   - product_weight
+   - product_color
+   - product_size
+   - product_brand
+   - product_material
+   - product_description
+   - product_rating
+   - product_reviews
+   - product_release_date
+   - product_expiry_date
+   - supplier_name
+   - supplier_contact
+   - supplier_email
+   - supplier_phone
+   - supplier_address
+   - supplier_city
+   - supplier_country
 
+2. Создаем dim_customer...
+   Уникальных клиентов: 10000
 
-During handling of the above exception, another exception occurred:
+3. Создаем dim_product...
+   Уникальных товаров: 6210
 
-Traceback (most recent call last):
-  File "/home/jovyan/work/test_postgres.py", line 36, in <module>
-    test_df.write.jdbc(jdbc_url, "test_table", mode="overwrite", properties=props)
-  File "/usr/local/spark/python/lib/pyspark.zip/pyspark/sql/readwriter.py", line 1984, in jdbc
-  File "/usr/local/spark/python/lib/py4j-0.10.9.7-src.zip/py4j/java_gateway.py", line 1322, in __call__
-  File "/usr/local/spark/python/lib/pyspark.zip/pyspark/errors/exceptions/captured.py", line 179, in deco
-  File "/usr/local/spark/python/lib/py4j-0.10.9.7-src.zip/py4j/protocol.py", line 326, in get_return_value
-py4j.protocol.Py4JJavaError: An error occurred while calling o49.jdbc.
-: java.lang.ClassNotFoundException: org.postgresql.Driver
-	at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
-	at org.apache.spark.sql.execution.datasources.jdbc.DriverRegistry$.register(DriverRegistry.scala:46)
-	at org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions.$anonfun$driverClass$1(JDBCOptions.scala:103)
-	at org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions.$anonfun$driverClass$1$adapted(JDBCOptions.scala:103)
-	at scala.Option.foreach(Option.scala:407)
-	at org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions.<init>(JDBCOptions.scala:103)
-	at org.apache.spark.sql.execution.datasources.jdbc.JdbcOptionsInWrite.<init>(JDBCOptions.scala:246)
-	at org.apache.spark.sql.execution.datasources.jdbc.JdbcOptionsInWrite.<init>(JDBCOptions.scala:250)
-	at org.apache.spark.sql.execution.datasources.jdbc.JdbcRelationProvider.createRelation(JdbcRelationProvider.scala:47)
-	at org.apache.spark.sql.execution.datasources.SaveIntoDataSourceCommand.run(SaveIntoDataSourceCommand.scala:48)
-	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult$lzycompute(commands.scala:75)
-	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult(commands.scala:73)
-	at org.apache.spark.sql.execution.command.ExecutedCommandExec.executeCollect(commands.scala:84)
-	at org.apache.spark.sql.execution.QueryExecution$$anonfun$eagerlyExecuteCommands$1.$anonfun$applyOrElse$1(QueryExecution.scala:107)
-	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:125)
-	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:201)
-	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:108)
-	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:900)
-	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:66)
-	at org.apache.spark.sql.execution.QueryExecution$$anonfun$eagerlyExecuteCommands$1.applyOrElse(QueryExecution.scala:107)
-	at org.apache.spark.sql.execution.QueryExecution$$anonfun$eagerlyExecuteCommands$1.applyOrElse(QueryExecution.scala:98)
-	at org.apache.spark.sql.catalyst.trees.TreeNode.$anonfun$transformDownWithPruning$1(TreeNode.scala:461)
-	at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(origin.scala:76)
-	at org.apache.spark.sql.catalyst.trees.TreeNode.transformDownWithPruning(TreeNode.scala:461)
-	at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.org$apache$spark$sql$catalyst$plans$logical$AnalysisHelper$$super$transformDownWithPruning(LogicalPlan.scala:32)
-	at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.transformDownWithPruning(AnalysisHelper.scala:267)
-	at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.transformDownWithPruning$(AnalysisHelper.scala:263)
-	at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.transformDownWithPruning(LogicalPlan.scala:32)
-	at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.transformDownWithPruning(LogicalPlan.scala:32)
-	at org.apache.spark.sql.catalyst.trees.TreeNode.transformDown(TreeNode.scala:437)
-	at org.apache.spark.sql.execution.QueryExecution.eagerlyExecuteCommands(QueryExecution.scala:98)
-	at org.apache.spark.sql.execution.QueryExecution.commandExecuted$lzycompute(QueryExecution.scala:85)
-	at org.apache.spark.sql.execution.QueryExecution.commandExecuted(QueryExecution.scala:83)
-	at org.apache.spark.sql.execution.QueryExecution.assertCommandExecuted(QueryExecution.scala:142)
-	at org.apache.spark.sql.DataFrameWriter.runCommand(DataFrameWriter.scala:859)
-	at org.apache.spark.sql.DataFrameWriter.saveToV1Source(DataFrameWriter.scala:388)
-	at org.apache.spark.sql.DataFrameWriter.saveInternal(DataFrameWriter.scala:361)
-	at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:248)
-	at org.apache.spark.sql.DataFrameWriter.jdbc(DataFrameWriter.scala:756)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
-	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
-	at py4j.Gateway.invoke(Gateway.java:282)
-	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
-	at py4j.commands.CallCommand.execute(CallCommand.java:79)
-	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
-	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
-	at java.base/java.lang.Thread.run(Thread.java:833)
+4. Создаем dim_store...
+   Уникальных магазинов: 10000
+
+5. Создаем dim_date...
+   Уникальных дат: 364
+
+6. Присоединяем store_id...
+
+7. Присоединяем date_id...
+
+8. Создаем fact_sales...
+   Записей в факт-таблице: 10000
+
+9. Сохраняем в PostgreSQL...
+   ✅ dim_customer
+   ✅ dim_product
+   ✅ dim_store
+   ✅ dim_date
+   ✅ fact_sales
+
+============================================================
+✅ МОДЕЛЬ ЗВЕЗДА УСПЕШНО СОЗДАНА!
+============================================================
+
+📊 Пример fact_sales:
++--------------+-----------+----------+--------+-------+-------+--------+-------------+
+|transaction_id|customer_id|product_id|store_id|date_id|revenue|quantity|review_rating|
++--------------+-----------+----------+--------+-------+-------+--------+-------------+
+|             2|          2|         2|    9503|    118|  55.36|       2|         NULL|
+|             5|          5|         5|    2750|    123| 458.82|       6|         NULL|
+|             1|          1|         1|    2001|    330|   53.0|       1|         NULL|
+|             4|          4|         4|    3284|     36|  45.02|       8|         NULL|
+|             3|          3|         3|    2955|     89|  49.39|       1|         NULL|
++--------------+-----------+----------+--------+-------+-------+--------+-------------+
+only showing top 5 rows
 
