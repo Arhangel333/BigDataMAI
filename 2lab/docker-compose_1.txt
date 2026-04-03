@@ -21,7 +21,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data  # Постоянное хранилище
       - ./mock_data:/mock_data  # Монтируем папку с CSV для импорта
-      - ./init_postgres.sql:/docker-entrypoint-initdb.d  # Скрипт инициализации
+      - ./init_postgres.sql:/docker-entrypoint-initdb.d/init.sql  # Скрипт инициализации
     networks:
       - lab_network
     restart: unless-stopped
@@ -67,9 +67,82 @@ services:
       - postgres
       - clickhouse
     restart: unless-stopped
+
+  # ============================================
+  # 4. Cassandra - ОПЦИОНАЛЬНО (бонус)
+  # ============================================
+  cassandra:
+    image: cassandra:4
+    container_name: cassandra_lab
+    ports:
+      - "9042:9042"   # CQL порт
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+    networks:
+      - lab_network
+    restart: unless-stopped
+    environment:
+      - CASSANDRA_CLUSTER_NAME=LabCluster
+      - CASSANDRA_NUM_TOKENS=256
+      - CASSANDRA_SEEDS=cassandra
+
+  # ============================================
+  # 5. MongoDB - ОПЦИОНАЛЬНО (бонус)
+  # ============================================
+  mongodb:
+    image: mongo:6
+    container_name: mongodb_lab
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - lab_network
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin123
+
+  # ============================================
+  # 6. Neo4j - ОПЦИОНАЛЬНО (бонус)
+  # ============================================
+  neo4j:
+    image: neo4j:5
+    container_name: neo4j_lab
+    ports:
+      - "7474:7474"   # HTTP (браузер)
+      - "7687:7687"   # Bolt (Spark подключение)
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - lab_network
+    restart: unless-stopped
+    environment:
+      - NEO4J_AUTH=neo4j/test1234
+      - NEO4J_PLUGINS=["apoc"]
+
+  # ============================================
+  # 7. Valkey (Redis-совместимый) - ОПЦИОНАЛЬНО
+  # ============================================
+  valkey:
+    image: valkey/valkey:7
+    container_name: valkey_lab
+    ports:
+      - "6379:6379"
+    volumes:
+      - valkey_data:/data
+    networks:
+      - lab_network
+    restart: unless-stopped
+    command: valkey-server --appendonly yes
+
 # ============================================
 # Volumes (постоянное хранилище данных)
 # ============================================
 volumes:
   postgres_data:
   clickhouse_data:
+  cassandra_data:
+  mongodb_data:
+  neo4j_data:
+  valkey_data:
