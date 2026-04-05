@@ -32,6 +32,9 @@ services:
   clickhouse:
     image: clickhouse/clickhouse-server:latest
     container_name: clickhouse_lab
+    environment:
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: clickhouse123
     ports:
       - "8123:8123"   # HTTP интерфейс (DBeaver)
       - "9000:9000"   # Нативный протокол (Spark)
