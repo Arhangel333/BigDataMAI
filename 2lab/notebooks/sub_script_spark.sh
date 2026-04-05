@@ -1,0 +1,1 @@
+spark-submit   --jars /home/jovyan/jars/clickhouse-jdbc-0.4.6-shaded.jar,/home/jovyan/jars/postgresql-42.6.0.jar   --driver-class-path /home/jovyan/jars/clickhouse-jdbc-0.4.6-shaded.jar:/home/jovyan/jars/postgresql-42.6.0.jar reports_to_clickhouse.py

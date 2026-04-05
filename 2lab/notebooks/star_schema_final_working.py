@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, year, month, dayofmonth, row_number, lit
+from pyspark.sql.functions import col, year, month, dayofmonth, row_number, lit, to_date
 from pyspark.sql.window import Window
 
 print("=" * 60)
@@ -58,7 +58,8 @@ print(f"   Уникальных магазинов: {dim_store.count()}")
 # 5. Создаем dim_date
 print("\n5. Создаем dim_date...")
 dim_date = df.select("sale_date").distinct() \
-    .withColumnRenamed("sale_date", "full_date") \
+    .withColumn("full_date", to_date(col("sale_date"), "M/d/yyyy")) \
+    .drop("sale_date") \
     .withColumn("year", year("full_date")) \
     .withColumn("month", month("full_date")) \
     .withColumn("day", dayofmonth("full_date"))
@@ -72,7 +73,11 @@ df_with_store = df.join(dim_store, on=["store_name", "store_city", "store_countr
 
 # 7. Присоединяем date_id
 print("\n7. Присоединяем date_id...")
-df_with_date = df_with_store.join(dim_date, df_with_store.sale_date == dim_date.full_date, "left")
+df_with_date = df_with_store.join(
+    dim_date,
+    to_date(col("sale_date"), "M/d/yyyy") == dim_date.full_date,
+    "left"
+)
 
 # 8. Создаем fact_sales (используем ПРАВИЛЬНЫЕ имена колонок из df)
 print("\n8. Создаем fact_sales...")
