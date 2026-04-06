@@ -1,0 +1,27 @@
+# Вывод скриптов
+output*.txt
+*.out
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Docker volumes
+*.vmdk
+*.raw
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/

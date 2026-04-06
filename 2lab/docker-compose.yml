@@ -65,6 +65,24 @@ services:
       - lab_network
     restart: unless-stopped
 
+  # Веб-интерфейс MongoDB
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo_express_lab
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: spark
+      ME_CONFIG_MONGODB_ADMINPASSWORD: spark123
+      ME_CONFIG_MONGODB_URL: mongodb://spark:spark123@mongodb:27017/
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin123
+    ports:
+      - "8081:8081"
+    networks:
+      - lab_network
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
   # ============================================
   # 5. Neo4j — графовая БД
   # ============================================
@@ -97,6 +115,20 @@ services:
       - lab_network
     restart: unless-stopped
     command: valkey-server --appendonly yes --requirepass valkey123
+
+  # Веб-интерфейс Valkey (Redis)
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis_commander_lab
+    environment:
+      REDIS_HOSTS: local:valkey:6379:0:valkey123
+    ports:
+      - "8082:8081"
+    networks:
+      - lab_network
+    depends_on:
+      - valkey
+    restart: unless-stopped
 
   # ============================================
   # 7. Cassandra — колоночная распределённая БД

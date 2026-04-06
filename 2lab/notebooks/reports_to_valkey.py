@@ -35,18 +35,21 @@ dim_product = spark.read.jdbc(pg_url, "dim_product", properties=pg_props)
 dim_customer = spark.read.jdbc(pg_url, "dim_customer", properties=pg_props)
 dim_store = spark.read.jdbc(pg_url, "dim_store", properties=pg_props)
 dim_date = spark.read.jdbc(pg_url, "dim_date", properties=pg_props)
+dim_supplier = spark.read.jdbc(pg_url, "dim_supplier", properties=pg_props)
 
 print(f"   fact_sales: {fact_sales.count()} строк")
 print(f"   dim_product: {dim_product.count()} строк")
 print(f"   dim_customer: {dim_customer.count()} строк")
 print(f"   dim_store: {dim_store.count()} строк")
 print(f"   dim_date: {dim_date.count()} строк")
+print(f"   dim_supplier: {dim_supplier.count()} строк")
 
 fact_sales.createOrReplaceTempView("fact_sales")
 dim_product.createOrReplaceTempView("dim_product")
 dim_customer.createOrReplaceTempView("dim_customer")
 dim_store.createOrReplaceTempView("dim_store")
 dim_date.createOrReplaceTempView("dim_date")
+dim_supplier.createOrReplaceTempView("dim_supplier")
 
 # ============================================
 # ОТЧЕТ 1: Витрина продаж по продуктам
@@ -148,6 +151,101 @@ popular_products = spark.sql("""
     ORDER BY total_sold DESC LIMIT 20
 """)
 save_to_valkey(popular_products, "popular_products")
+
+# ОТЧЕТ 6: Рейтинг и отзывы
+print("\n7. Создаем отчет: Рейтинг и отзывы...")
+product_ratings = spark.sql("""
+    SELECT p.product_id, p.product_name, p.product_category,
+        CAST(ROUND(AVG(f.review_rating), 2) AS FLOAT) as avg_rating,
+        CAST(MAX(p.product_reviews) AS INT) as max_reviews
+    FROM fact_sales f JOIN dim_product p ON f.product_id = p.product_id
+    WHERE f.review_rating IS NOT NULL
+    GROUP BY p.product_id, p.product_name, p.product_category
+    ORDER BY avg_rating DESC LIMIT 20
+""")
+save_to_valkey(product_ratings, "product_ratings")
+
+# ОТЧЕТ 7: Сравнение выручки по годам
+print("\n8. Создаем отчет: Сравнение выручки по годам...")
+yearly_revenue = spark.sql("""
+    SELECT CAST(d.year AS INT) as year,
+        CAST(COUNT(f.transaction_id) AS INT) as total_sales,
+        CAST(SUM(f.revenue) AS FLOAT) as total_revenue,
+        CAST(AVG(f.revenue) AS FLOAT) as avg_order_value,
+        CAST(SUM(f.quantity) AS INT) as total_quantity
+    FROM fact_sales f JOIN dim_date d ON f.date_id = d.date_id
+    WHERE d.year IS NOT NULL
+    GROUP BY d.year ORDER BY d.year
+""")
+save_to_valkey(yearly_revenue, "yearly_revenue")
+
+# ОТЧЕТ 8: Распределение магазинов по локациям
+print("\n9. Создаем отчет: Распределение магазинов по локациям...")
+stores_by_location = spark.sql("""
+    SELECT s.store_country, s.store_city,
+        CAST(COUNT(DISTINCT s.store_id) AS INT) as store_count,
+        CAST(SUM(f.revenue) AS FLOAT) as total_revenue,
+        CAST(COUNT(f.transaction_id) AS INT) as total_sales
+    FROM fact_sales f JOIN dim_store s ON f.store_id = s.store_id
+    GROUP BY s.store_country, s.store_city
+    ORDER BY total_revenue DESC
+""")
+save_to_valkey(stores_by_location, "stores_by_location")
+
+# ОТЧЕТ 9: Топ продуктов по отзывам
+print("\n10. Создаем отчет: Топ продуктов по отзывам...")
+top_reviews = spark.sql("""
+    SELECT p.product_id, p.product_name, p.product_category,
+        CAST(MAX(p.product_reviews) AS INT) as reviews_count,
+        CAST(ROUND(AVG(f.review_rating), 2) AS FLOAT) as avg_rating,
+        CAST(SUM(f.revenue) AS FLOAT) as total_revenue
+    FROM fact_sales f JOIN dim_product p ON f.product_id = p.product_id
+    WHERE p.product_reviews IS NOT NULL
+    GROUP BY p.product_id, p.product_name, p.product_category
+    ORDER BY reviews_count DESC LIMIT 20
+""")
+save_to_valkey(top_reviews, "top_reviews")
+
+# ОТЧЕТ 10: Витрина по поставщикам
+print("\n11. Создаем отчет: Витрина по поставщикам...")
+
+top_suppliers = spark.sql("""
+    SELECT s.supplier_id, s.supplier_name, s.supplier_country, s.supplier_city,
+        CAST(SUM(f.revenue) AS FLOAT) as total_revenue,
+        CAST(COUNT(DISTINCT f.transaction_id) AS INT) as total_sales,
+        CAST(AVG(f.revenue / f.quantity) AS FLOAT) as avg_product_price
+    FROM fact_sales f JOIN dim_supplier s ON f.supplier_id = s.supplier_id
+    GROUP BY s.supplier_id, s.supplier_name, s.supplier_country, s.supplier_city
+    ORDER BY total_revenue DESC LIMIT 5
+""")
+save_to_valkey(top_suppliers, "top_suppliers")
+
+suppliers_by_country = spark.sql("""
+    SELECT s.supplier_country,
+        CAST(COUNT(DISTINCT s.supplier_id) AS INT) as supplier_count,
+        CAST(SUM(f.revenue) AS FLOAT) as total_revenue,
+        CAST(AVG(f.revenue / f.quantity) AS FLOAT) as avg_price
+    FROM fact_sales f JOIN dim_supplier s ON f.supplier_id = s.supplier_id
+    GROUP BY s.supplier_country
+    ORDER BY total_revenue DESC
+""")
+save_to_valkey(suppliers_by_country, "suppliers_by_country")
+
+# ОТЧЕТ 11: Корреляция рейтинга и продаж
+print("\n12. Создаем отчет: Корреляция рейтинга и продаж...")
+
+rating_sales_corr = spark.sql("""
+    SELECT CAST(ROUND(f.review_rating, 1) AS FLOAT) as rating_group,
+        CAST(COUNT(f.transaction_id) AS INT) as sales_count,
+        CAST(SUM(f.revenue) AS FLOAT) as total_revenue,
+        CAST(AVG(f.revenue) AS FLOAT) as avg_revenue,
+        CAST(SUM(f.quantity) AS INT) as total_quantity
+    FROM fact_sales f
+    WHERE f.review_rating IS NOT NULL
+    GROUP BY ROUND(f.review_rating, 1)
+    ORDER BY rating_group
+""")
+save_to_valkey(rating_sales_corr, "rating_sales_corr")
 
 print("\n" + "=" * 60)
 print("✅ ВСЕ ОТЧЕТЫ УСПЕШНО СОЗДАНЫ В VALKEY!")
