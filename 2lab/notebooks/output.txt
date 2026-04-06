@@ -47,15 +47,15 @@ only showing top 3 rows
 ✅ В таблице mock_data 10000 строк
 
 📊 Первые 5 строк из PostgreSQL:
-+---+-------------------+------------------+------------+------------------------+----------------+--------------------+-----------------+-----------------+------------------+-----------------+----------------+--------------------------+------------------------+------------------+------------+----------------+-------------+----------------+----------+----------------+--------------+---------------+-------------+----------------+------------+--------------+---------------+-----------+-------------+------------+--------------------------+------------+--------------+-------------+------------+-------------+----------------+----------------------------------------+--------------+---------------+--------------------+-------------------+-------------+----------------+---------------------------+--------------+----------------+-------------------+----------------+
-| id|customer_first_name|customer_last_name|customer_age|          customer_email|customer_country|customer_postal_code|customer_pet_type|customer_pet_name|customer_pet_breed|seller_first_name|seller_last_name|              seller_email|          seller_country|seller_postal_code|product_name|product_category|product_price|product_quantity| sale_date|sale_customer_id|sale_seller_id|sale_product_id|sale_quantity|sale_total_price|  store_name|store_location|     store_city|store_state|store_country| store_phone|               store_email|pet_category|product_weight|product_color|product_size|product_brand|product_material|                     product_description|product_rating|product_reviews|product_release_date|product_expiry_date|supplier_name|supplier_contact|             supplier_email|supplier_phone|supplier_address|      supplier_city|supplier_country|
-+---+-------------------+------------------+------------+------------------------+----------------+--------------------+-----------------+-----------------+------------------+-----------------+----------------+--------------------------+------------------------+------------------+------------+----------------+-------------+----------------+----------+----------------+--------------+---------------+-------------+----------------+------------+--------------+---------------+-----------+-------------+------------+--------------------------+------------+--------------+-------------+------------+-------------+----------------+----------------------------------------+--------------+---------------+--------------------+-------------------+-------------+----------------+---------------------------+--------------+----------------+-------------------+----------------+
-|  1|              Conni|            Leydon|          63|      lswait0@amazon.com|          France|         77404 CEDEX|              cat|              Jan|Labrador Retriever|            Lenee|           Swait|             lswait0@51.la|Central African Republic|              NULL|   Bird Cage|            Food|        18.57|              87| 2/27/2021|               1|             1|              1|            3|           83.32|Thoughtworks|      Suite 91|Lagny-sur-Marne|         A8|       Poland|988-582-6510|       lswait0@behance.net|        Fish|          49.9|          Red|       Large|      Feedmix|           Stone|Maecenas tristique, est et tempus sem...|           3.6|            360|           9/29/2022|          2/28/2026|  Thoughtbeat|     Lenee Swait|         lswait0@oracle.com|  852-750-6042|       Room 1411|          Batangafo|          Russia|
-|  2|               Alec|      Chamberlayne|          26|       cwalsh1@state.gov|     Philippines|                9401|              dog|           Shelia|Labrador Retriever|            Colet|           Walsh|cwalsh1@simplemachines.org|                Malaysia|             87028|    Dog Food|            Cage|        67.72|              88| 2/27/2021|               2|             2|              2|            4|           384.2|       Yabox|      Apt 1452|        Batasan|       NULL|        China|359-693-3833|         cwalsh1@umich.edu|        Fish|          44.5|         Pink|      Medium|      Pixoboo|           Vinyl|Curabitur gravida nisi at nibh. In ha...|           2.1|            754|           5/31/2016|          9/11/2029|         Eayo|     Colet Walsh|        cwalsh1@addthis.com|  651-123-9474|         Suite 4|             Labuan|          Sweden|
-|  3|            Vaughan|           Shapiro|          47|      jelnough2@xing.com|      Madagascar|                NULL|              cat|           Gunner|           Siamese|             Jane|         Elnough|     jelnough2@storify.com|               Argentina|              8201|    Dog Food|            Food|         4.49|              77|11/30/2021|               3|             3|              3|            6|           11.58|     Tagtune|      Suite 17|Ampasimanolotra|       NULL|    Indonesia|208-198-3755|jelnough2@miitbeian.gov.cn|        Dogs|          42.6|         Mauv|      Medium|       Voonte|           Brass|Duis bibendum. Morbi non quam nec dui...|           1.5|            313|          12/14/2012|           1/5/2024|      Gabspot|    Jane Elnough|jelnough2@ezinearticles.com|  325-676-3913|       Room 1133|Veinticinco de Mayo|        Portugal|
-|  4|               Bank|             Audas|          81|lscay3@howstuffworks.com|        Portugal|            2860-010|             bird|            Nahum|Labrador Retriever|          Lorilyn|            Scay|          lscay3@nymag.com|                  Russia|            462159|     Cat Toy|            Cage|        28.41|              91|10/24/2021|               4|             4|              4|            2|          273.35|     Flipbug|       Apt 347|   Alhos Vedros|         15|        China|469-572-0500|    lscay3@bizjournals.com|    Reptiles|           5.5|       Indigo|       Small|       Leenti|      Plexiglass|Aliquam quis turpis eget elit sodales...|           3.6|            938|           11/6/2010|           6/3/2025|  Jabberstorm|    Lorilyn Scay|      lscay3@opensource.org|  112-474-3398|       Room 1500|          Saraktash|           China|
-|  5|              Anthe|            Pletts|          72|  ctoll4@miibeian.gov.cn|          Russia|              628389|              cat|             Brod|Labrador Retriever|            Court|            Toll|          ctoll4@ifeng.com|                Bulgaria|              2281|   Bird Cage|            Cage|        88.39|              35| 6/27/2021|               5|             5|              5|            2|          305.87|   Browsebug|  PO Box 64963|       Pyt-Yakh|       NULL|       Sweden|508-703-9322| ctoll4@simplemachines.org|        Dogs|          36.4|       Indigo|      Medium|     Feedfire|         Plastic|Maecenas leo odio, condimentum id, lu...|           2.4|            943|           11/2/2018|          7/10/2030|       Trudeo|      Court Toll|            ctoll4@usgs.gov|  647-688-5659|        Apt 1574|           Lakatnik|           China|
-+---+-------------------+------------------+------------+------------------------+----------------+--------------------+-----------------+-----------------+------------------+-----------------+----------------+--------------------------+------------------------+------------------+------------+----------------+-------------+----------------+----------+----------------+--------------+---------------+-------------+----------------+------------+--------------+---------------+-----------+-------------+------------+--------------------------+------------+--------------+-------------+------------+-------------+----------------+----------------------------------------+--------------+---------------+--------------------+-------------------+-------------+----------------+---------------------------+--------------+----------------+-------------------+----------------+
++---+-------------------+------------------+------------+----------------------------+----------------+--------------------+-----------------+-----------------+------------------+-----------------+----------------+---------------------------+--------------+------------------+------------+----------------+-------------+----------------+----------+----------------+--------------+---------------+-------------+----------------+-------------+--------------+-----------+-----------+-------------+------------+---------------------------+------------+--------------+-------------+------------+-------------+----------------+----------------------------------------+--------------+---------------+--------------------+-------------------+-------------+----------------+------------------------+--------------+----------------+-------------+----------------+
+| id|customer_first_name|customer_last_name|customer_age|              customer_email|customer_country|customer_postal_code|customer_pet_type|customer_pet_name|customer_pet_breed|seller_first_name|seller_last_name|               seller_email|seller_country|seller_postal_code|product_name|product_category|product_price|product_quantity| sale_date|sale_customer_id|sale_seller_id|sale_product_id|sale_quantity|sale_total_price|   store_name|store_location| store_city|store_state|store_country| store_phone|                store_email|pet_category|product_weight|product_color|product_size|product_brand|product_material|                     product_description|product_rating|product_reviews|product_release_date|product_expiry_date|supplier_name|supplier_contact|          supplier_email|supplier_phone|supplier_address|supplier_city|supplier_country|
++---+-------------------+------------------+------------+----------------------------+----------------+--------------------+-----------------+-----------------+------------------+-----------------+----------------+---------------------------+--------------+------------------+------------+----------------+-------------+----------------+----------+----------------+--------------+---------------+-------------+----------------+-------------+--------------+-----------+-----------+-------------+------------+---------------------------+------------+--------------+-------------+------------+-------------+----------------+----------------------------------------+--------------+---------------+--------------------+-------------------+-------------+----------------+------------------------+--------------+----------------+-------------+----------------+
+|  1|          Consolata|          Campsall|          68|kmckean0@merriam-webster.com|       Indonesia|                NULL|             bird|         Ninnetta|          Parakeet|              Kat|          McKean|         kmckean0@wiley.com|         China|              NULL|    Dog Food|             Toy|        84.29|              69| 8/17/2021|               1|             1|              1|            7|          202.75|Twitternation|      Apt 1223|    Ngembul|       NULL|       Russia|443-713-5919|    kmckean0@vistaprint.com|       Birds|          41.4|       Indigo|      Medium|      Flipbug|           Vinyl|In hac habitasse platea dictumst. Eti...|           3.6|            733|            1/9/2018|          2/21/2023|       Talane|      Kat McKean|   kmckean0@illinois.edu|  626-787-2367|        Apt 1118|     Tongqing|       Guatemala|
+|  2|            Cordell|            Vidler|          23|           dbrims1@topsy.com|        Portugal|            2985-006|             bird|        Delphinia|          Parakeet|              Dal|           Brims|           dbrims1@xrea.com|        Poland|            89-511|    Dog Food|            Cage|         8.53|              52| 1/10/2021|               2|             2|              2|            8|          175.36|    Jaxnation|      Suite 27|      Canha|         15|    Indonesia|800-108-8723|          dbrims1@google.pl|        Cats|          32.6|        Khaki|       Large|     Gigaclub|      Plexiglass|Proin eu mi. Nulla ac enim. In tempor...|           3.8|            748|           4/25/2017|           4/2/2025|     Devpoint|       Dal Brims|            dbrims1@g.co|  652-136-9505|        Suite 69|       Cekcyn|          Brazil|
+|  3|              Quill|             Ellin|          47|        jschooley2@tmall.com|           China|                NULL|              dog|            Diana|Labrador Retriever|           Julius|        Schooley|       jschooley2@mysql.com|Czech Republic|            181 00|    Dog Food|            Food|        78.15|               4|12/13/2021|               3|             3|              3|            6|          106.95|         Mita|      Apt 1605|    Xinquan|       NULL|        China|983-639-1289|        jschooley2@about.me|        Fish|          10.9|       Indigo|      Medium|       Meezzy|           Vinyl|Nulla ut erat id mauris vulputate ele...|           3.2|            287|            1/1/2012|          11/4/2028|    Reallinks| Julius Schooley| jschooley2@e-recht24.de|  639-384-3820|    PO Box 68308|     Vysehrad|           Italy|
+|  4|             Jillie|      Valens-Smith|          48|        wfutter3@walmart.com|        Portugal|            2725-511|             bird|           Shayna|Labrador Retriever|             Ward|          Futter|        wfutter3@tumblr.com|        Brazil|         49000-000|     Cat Toy|            Food|         3.94|               7| 4/21/2021|               4|             4|              4|            1|          325.24|      Dynazzy|      Suite 58|    Sacotes|         11|       Russia|274-542-2249|            wfutter3@w3.org|       Birds|           9.2|         Puce|       Large|       Yambee|           Brass|Aenean fermentum. Donec ut mauris ege...|           3.6|            863|           7/24/2018|           7/5/2027|      Yakitri|     Ward Futter|       wfutter3@narod.ru|  442-217-9316|       5th Floor|      Aracaju|      Kazakhstan|
+|  5|            Ingemar|              Larn|          80|    kbrewerton4@multiply.com|           China|                NULL|              cat|           Gareth|          Parakeet|            Kerry|       Brewerton|kbrewerton4@marketwatch.com|         Nepal|              NULL|     Cat Toy|            Cage|        58.35|              30|  3/5/2021|               5|             5|              5|            6|          184.25|      Innojam|       Apt 715|Long’anqiao|       NULL|        China|296-806-9837|kbrewerton4@accuweather.com|       Birds|          46.6|      Crimson|      Medium|         Eare|         Granite|In hac habitasse platea dictumst. Eti...|           1.4|            142|           1/26/2020|          3/18/2027|        Yabox| Kerry Brewerton|kbrewerton4@mashable.com|  552-852-1372|        Room 693|       Butwāl|           China|
++---+-------------------+------------------+------------+----------------------------+----------------+--------------------+-----------------+-----------------+------------------+-----------------+----------------+---------------------------+--------------+------------------+------------+----------------+-------------+----------------+----------+----------------+--------------+---------------+-------------+----------------+-------------+--------------+-----------+-----------+-------------+------------+---------------------------+------------+--------------+-------------+------------+-------------+----------------+----------------------------------------+--------------+---------------+--------------------+-------------------+-------------+----------------+------------------------+--------------+----------------+-------------+----------------+
 only showing top 5 rows
 
 
@@ -125,7 +125,7 @@ only showing top 5 rows
    Уникальных клиентов: 10000
 
 3. Создаем dim_product...
-   Уникальных товаров: 6210
+   Уникальных товаров: 10000
 
 4. Создаем dim_store...
    Уникальных магазинов: 10000
@@ -133,18 +133,24 @@ only showing top 5 rows
 5. Создаем dim_date...
    Уникальных дат: 364
 
+5.5. Создаем dim_supplier...
+   Уникальных поставщиков: 10000
+
 6. Присоединяем store_id...
+
+6.5. Присоединяем supplier_id...
 
 7. Присоединяем date_id...
 
 8. Создаем fact_sales...
-   Записей в факт-таблице: 10000
+   Записей в факт-таблице: 281170
 
 9. Сохраняем в PostgreSQL...
    ✅ dim_customer
    ✅ dim_product
    ✅ dim_store
    ✅ dim_date
+   ✅ dim_supplier
    ✅ fact_sales
 
 ============================================================
@@ -152,15 +158,15 @@ only showing top 5 rows
 ============================================================
 
 📊 Пример fact_sales:
-+--------------+-----------+----------+--------+-------+-------+--------+-------------+
-|transaction_id|customer_id|product_id|store_id|date_id|revenue|quantity|review_rating|
-+--------------+-----------+----------+--------+-------+-------+--------+-------------+
-|             5|          5|         5|     849|    178| 305.87|       2|         NULL|
-|             4|          4|         4|    2889|    297| 273.35|       2|         NULL|
-|             2|          2|         2|    9151|     58|  384.2|       4|         NULL|
-|             3|          3|         3|    7556|    334|  11.58|       6|         NULL|
-|             6|          6|         6|     475|    176| 454.33|       3|         NULL|
-+--------------+-----------+----------+--------+-------+-------+--------+-------------+
++--------------+-----------+----------+--------+-----------+-------+-------+--------+-------------+
+|transaction_id|customer_id|product_id|store_id|supplier_id|date_id|revenue|quantity|review_rating|
++--------------+-----------+----------+--------+-----------+-------+-------+--------+-------------+
+|             4|          4|         4|    2016|       9214|    111| 325.24|       1|          3.6|
+|             4|          4|         4|    2016|       9213|    111| 325.24|       1|          3.6|
+|             4|          4|         4|    2016|       9212|    111| 325.24|       1|          3.6|
+|             4|          4|         4|    2016|       9211|    111| 325.24|       1|          3.6|
+|             4|          4|         4|    2016|       9210|    111| 325.24|       1|          3.6|
++--------------+-----------+----------+--------+-----------+-------+-------+--------+-------------+
 only showing top 5 rows
 
 ============================================================
@@ -168,11 +174,12 @@ only showing top 5 rows
 ============================================================
 
 1. Загружаем данные из PostgreSQL...
-   fact_sales: 10000 строк
-   dim_product: 6210 строк
+   fact_sales: 281170 строк
+   dim_product: 10000 строк
    dim_customer: 10000 строк
    dim_store: 10000 строк
    dim_date: 364 строк
+   dim_supplier: 10000 строк
 
 2. Создаем отчет: Витрина продаж по продуктам...
    ✅ report_top_products
@@ -191,6 +198,25 @@ only showing top 5 rows
 6. Создаем отчет: Витрина качества продукции...
    ✅ report_popular_products
 
+7. Создаем отчет: Рейтинг и отзывы...
+   ✅ report_product_ratings
+
+8. Создаем отчет: Сравнение выручки по годам...
+   ✅ report_yearly_revenue
+
+9. Создаем отчет: Распределение магазинов по локациям...
+   ✅ report_stores_by_location
+
+10. Создаем отчет: Топ продуктов по отзывам...
+   ✅ report_top_reviews
+
+11. Создаем отчет: Витрина по поставщикам...
+   ✅ report_top_suppliers
+   ✅ report_suppliers_by_country
+
+12. Создаем отчет: Корреляция рейтинга и продаж...
+   ✅ report_rating_sales_corr
+
 ============================================================
 ✅ ВСЕ ОТЧЕТЫ УСПЕШНО СОЗДАНЫ В CLICKHOUSE!
 ============================================================
@@ -203,16 +229,24 @@ only showing top 5 rows
    - report_monthly_trends
    - report_top_stores
    - report_popular_products
+   - report_product_ratings
+   - report_yearly_revenue
+   - report_stores_by_location
+   - report_top_reviews
+   - report_top_suppliers
+   - report_suppliers_by_country
+   - report_rating_sales_corr
 ============================================================
 СОЗДАНИЕ ОТЧЕТОВ В MONGODB
 ============================================================
 
 1. Загружаем данные из PostgreSQL...
-   fact_sales: 10000 строк
-   dim_product: 6210 строк
+   fact_sales: 281170 строк
+   dim_product: 10000 строк
    dim_customer: 10000 строк
    dim_store: 10000 строк
    dim_date: 364 строк
+   dim_supplier: 10000 строк
 
 2. Создаем отчет: Витрина продаж по продуктам...
    ✅ report_top_products (10 документов)
@@ -231,28 +265,55 @@ only showing top 5 rows
 6. Создаем отчет: Витрина качества продукции...
    ✅ report_popular_products (20 документов)
 
+7. Создаем отчет: Рейтинг и отзывы...
+   ✅ report_product_ratings (20 документов)
+
+8. Создаем отчет: Сравнение выручки по годам...
+   ✅ report_yearly_revenue (1 документов)
+
+9. Создаем отчет: Распределение магазинов по локациям...
+   ✅ report_stores_by_location (9852 документов)
+
+10. Создаем отчет: Топ продуктов по отзывам...
+   ✅ report_top_reviews (20 документов)
+
+11. Создаем отчет: Витрина по поставщикам...
+   ✅ report_top_suppliers (5 документов)
+   ✅ report_suppliers_by_country (203 документов)
+
+12. Создаем отчет: Корреляция рейтинга и продаж...
+   ✅ report_rating_sales_corr (41 документов)
+
 ============================================================
 ✅ ВСЕ ОТЧЕТЫ УСПЕШНО СОЗДАНЫ В MONGODB!
 ============================================================
 
 📊 Коллекции в MongoDB:
-   - etl_reports.report_top_products (10 док.)
-   - etl_reports.report_top_stores (5 док.)
-   - etl_reports.report_monthly_trends (12 док.)
-   - etl_reports.report_top_customers (10 док.)
    - etl_reports.report_customers_by_country (204 док.)
-   - etl_reports.report_revenue_by_category (3 док.)
+   - etl_reports.report_monthly_trends (12 док.)
    - etl_reports.report_popular_products (20 док.)
+   - etl_reports.report_product_ratings (20 док.)
+   - etl_reports.report_rating_sales_corr (41 док.)
+   - etl_reports.report_revenue_by_category (3 док.)
+   - etl_reports.report_stores_by_location (9852 док.)
+   - etl_reports.report_suppliers_by_country (203 док.)
+   - etl_reports.report_top_customers (10 док.)
+   - etl_reports.report_top_products (10 док.)
+   - etl_reports.report_top_reviews (20 док.)
+   - etl_reports.report_top_stores (5 док.)
+   - etl_reports.report_top_suppliers (5 док.)
+   - etl_reports.report_yearly_revenue (1 док.)
 ============================================================
 СОЗДАНИЕ ОТЧЕТОВ В NEO4J
 ============================================================
 
 1. Загружаем данные из PostgreSQL...
-   fact_sales: 10000 строк
-   dim_product: 6210 строк
+   fact_sales: 281170 строк
+   dim_product: 10000 строк
    dim_customer: 10000 строк
    dim_store: 10000 строк
    dim_date: 364 строк
+   dim_supplier: 10000 строк
 
 2. Создаем отчет: Витрина продаж по продуктам...
    ✅ TopProduct (10 узлов)
@@ -271,21 +332,41 @@ only showing top 5 rows
 6. Создаем отчет: Витрина качества продукции...
    ✅ PopularProduct (20 узлов)
 
+7. Создаем отчет: Рейтинг и отзывы...
+   ✅ ProductRating (20 узлов)
+
+8. Создаем отчет: Сравнение выручки по годам...
+   ✅ YearlyRevenue (1 узлов)
+
+9. Создаем отчет: Распределение магазинов по локациям...
+   ✅ StoreLocation (9852 узлов)
+
+10. Создаем отчет: Топ продуктов по отзывам...
+   ✅ TopReview (20 узлов)
+
+11. Создаем отчет: Витрина по поставщикам...
+   ✅ TopSupplier (5 узлов)
+   ✅ SupplierCountry (203 узлов)
+
+12. Создаем отчет: Корреляция рейтинга и продаж...
+   ✅ RatingSales (41 узлов)
+
 ============================================================
 ✅ ВСЕ ОТЧЕТЫ УСПЕШНО СОЗДАНЫ В NEO4J!
 ============================================================
-📊 Узлы: TopProduct, Category, TopCustomer, Country, MonthTrend, TopStore, PopularProduct
+📊 Узлы: TopProduct, Category, TopCustomer, Country, MonthTrend, TopStore, PopularProduct, ProductRating, YearlyRevenue, StoreLocation, TopReview, TopSupplier, SupplierCountry, RatingSales
 📊 Открыть: http://localhost:7474 (neo4j / neo4j123)
 ============================================================
 СОЗДАНИЕ ОТЧЕТОВ В VALKEY
 ============================================================
 
 1. Загружаем данные из PostgreSQL...
-   fact_sales: 10000 строк
-   dim_product: 6210 строк
+   fact_sales: 281170 строк
+   dim_product: 10000 строк
    dim_customer: 10000 строк
    dim_store: 10000 строк
    dim_date: 364 строк
+   dim_supplier: 10000 строк
 
 2. Создаем отчет: Витрина продаж по продуктам...
    ✅ top_products (10 записей)
@@ -304,6 +385,25 @@ only showing top 5 rows
 6. Создаем отчет: Витрина качества продукции...
    ✅ popular_products (20 записей)
 
+7. Создаем отчет: Рейтинг и отзывы...
+   ✅ product_ratings (20 записей)
+
+8. Создаем отчет: Сравнение выручки по годам...
+   ✅ yearly_revenue (1 записей)
+
+9. Создаем отчет: Распределение магазинов по локациям...
+   ✅ stores_by_location (9852 записей)
+
+10. Создаем отчет: Топ продуктов по отзывам...
+   ✅ top_reviews (20 записей)
+
+11. Создаем отчет: Витрина по поставщикам...
+   ✅ top_suppliers (5 записей)
+   ✅ suppliers_by_country (203 записей)
+
+12. Создаем отчет: Корреляция рейтинга и продаж...
+   ✅ rating_sales_corr (41 записей)
+
 ============================================================
 ✅ ВСЕ ОТЧЕТЫ УСПЕШНО СОЗДАНЫ В VALKEY!
 ============================================================
@@ -312,10 +412,17 @@ only showing top 5 rows
    - report:customers_by_country
    - report:monthly_trends
    - report:popular_products
+   - report:product_ratings
+   - report:rating_sales_corr
    - report:revenue_by_category
+   - report:stores_by_location
+   - report:suppliers_by_country
    - report:top_customers
    - report:top_products
+   - report:top_reviews
    - report:top_stores
+   - report:top_suppliers
+   - report:yearly_revenue
 :: loading settings :: url = jar:file:/usr/local/spark-3.5.0-bin-hadoop3/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
 ============================================================
 СОЗДАНИЕ ОТЧЕТОВ В CASSANDRA
@@ -325,11 +432,12 @@ only showing top 5 rows
    ✅ Все 7 таблиц созданы
 
 1. Загружаем данные из PostgreSQL...
-   fact_sales: 10000 строк
-   dim_product: 6210 строк
+   fact_sales: 281170 строк
+   dim_product: 10000 строк
    dim_customer: 10000 строк
    dim_store: 10000 строк
    dim_date: 364 строк
+   dim_supplier: 10000 строк
 
 2. Создаем отчет: Витрина продаж по продуктам...
    ✅ report_top_products
@@ -348,6 +456,25 @@ only showing top 5 rows
 6. Создаем отчет: Витрина качества продукции...
    ✅ report_popular_products
 
+7. Создаем отчет: Рейтинг и отзывы...
+   ✅ report_product_ratings
+
+8. Создаем отчет: Сравнение выручки по годам...
+   ✅ report_yearly_revenue
+
+9. Создаем отчет: Распределение магазинов по локациям...
+   ✅ report_stores_by_location
+
+10. Создаем отчет: Топ продуктов по отзывам...
+   ✅ report_top_reviews
+
+11. Создаем отчет: Витрина по поставщикам...
+   ✅ report_top_suppliers
+   ✅ report_suppliers_by_country
+
+12. Создаем отчет: Корреляция рейтинга и продаж...
+   ✅ report_rating_sales_corr
+
 ============================================================
 ✅ ВСЕ ОТЧЕТЫ УСПЕШНО СОЗДАНЫ В CASSANDRA!
 ============================================================
@@ -360,3 +487,10 @@ only showing top 5 rows
    - etl_reports.report_monthly_trends
    - etl_reports.report_top_stores
    - etl_reports.report_popular_products
+   - etl_reports.report_product_ratings
+   - etl_reports.report_yearly_revenue
+   - etl_reports.report_stores_by_location
+   - etl_reports.report_top_reviews
+   - etl_reports.report_top_suppliers
+   - etl_reports.report_suppliers_by_country
+   - etl_reports.report_rating_sales_corr

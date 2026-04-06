@@ -39,7 +39,9 @@ print("\n3. Создаем dim_product...")
 dim_product = df.select(
     col("sale_product_id").alias("product_id"),
     col("product_name"),
-    col("product_category")
+    col("product_category"),
+    col("product_rating").cast("double"),
+    col("product_reviews").cast("int")
 ).distinct()
 print(f"   Уникальных товаров: {dim_product.count()}")
 
@@ -67,13 +69,32 @@ window = Window.orderBy("full_date")
 dim_date = dim_date.withColumn("date_id", row_number().over(window))
 print(f"   Уникальных дат: {dim_date.count()}")
 
+# 5.5 Создаем dim_supplier
+print("\n5.5. Создаем dim_supplier...")
+dim_supplier = df.select(
+    col("supplier_name"),
+    col("supplier_email"),
+    col("supplier_country"),
+    col("supplier_city"),
+    col("supplier_address"),
+    col("supplier_phone")
+).distinct()
+window_sup = Window.orderBy("supplier_name")
+dim_supplier = dim_supplier.withColumn("supplier_id", row_number().over(window_sup))
+dim_supplier = dim_supplier.select("supplier_id", "supplier_name", "supplier_email", "supplier_country", "supplier_city", "supplier_address", "supplier_phone")
+print(f"   Уникальных поставщиков: {dim_supplier.count()}")
+
 # 6. Присоединяем store_id
 print("\n6. Присоединяем store_id...")
 df_with_store = df.join(dim_store, on=["store_name", "store_city", "store_country"], how="left")
 
+# 6.5 Присоединяем supplier_id
+print("\n6.5. Присоединяем supplier_id...")
+df_with_supplier = df_with_store.join(dim_supplier, on="supplier_name", how="left")
+
 # 7. Присоединяем date_id
 print("\n7. Присоединяем date_id...")
-df_with_date = df_with_store.join(
+df_with_date = df_with_supplier.join(
     dim_date,
     to_date(col("sale_date"), "M/d/yyyy") == dim_date.full_date,
     "left"
@@ -83,13 +104,14 @@ df_with_date = df_with_store.join(
 print("\n8. Создаем fact_sales...")
 fact_sales = df_with_date.select(
     col("id").alias("transaction_id"),
-    col("sale_customer_id").alias("customer_id"),      # ← было sale_customer_id
-    col("sale_product_id").alias("product_id"),        # ← было sale_product_id (не product_id!)
+    col("sale_customer_id").alias("customer_id"),
+    col("sale_product_id").alias("product_id"),
     col("store_id"),
+    col("supplier_id"),
     col("date_id"),
-    col("sale_total_price").alias("revenue"),          # ← sale_total_price
-    col("sale_quantity").alias("quantity"),            # ← sale_quantity
-    lit(None).cast("double").alias("review_rating")
+    col("sale_total_price").alias("revenue"),
+    col("sale_quantity").alias("quantity"),
+    col("product_rating").cast("double").alias("review_rating")
 )
 print(f"   Записей в факт-таблице: {fact_sales.count()}")
 
@@ -103,6 +125,8 @@ dim_store.write.jdbc(jdbc_url, "dim_store", mode="overwrite", properties=props)
 print("   ✅ dim_store")
 dim_date.write.jdbc(jdbc_url, "dim_date", mode="overwrite", properties=props)
 print("   ✅ dim_date")
+dim_supplier.write.jdbc(jdbc_url, "dim_supplier", mode="overwrite", properties=props)
+print("   ✅ dim_supplier")
 fact_sales.write.jdbc(jdbc_url, "fact_sales", mode="overwrite", properties=props)
 print("   ✅ fact_sales")
 
