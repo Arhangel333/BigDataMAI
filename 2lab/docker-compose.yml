@@ -49,7 +49,78 @@ services:
         hard: 262144
 
   # ============================================
-  # 3. Apache Spark с Jupyter Notebook
+  # 4. MongoDB — документоориентированная БД
+  # ============================================
+  mongodb:
+    image: mongo:7
+    container_name: mongodb_lab
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: spark
+      MONGO_INITDB_ROOT_PASSWORD: spark123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - lab_network
+    restart: unless-stopped
+
+  # ============================================
+  # 5. Neo4j — графовая БД
+  # ============================================
+  neo4j:
+    image: neo4j:5
+    container_name: neo4j_lab
+    environment:
+      NEO4J_AUTH: neo4j/neo4j123
+      NEO4J_PLUGINS: '["apoc"]'
+    ports:
+      - "7474:7474"   # Web интерфейс
+      - "7687:7687"   # Bolt протокол
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - lab_network
+    restart: unless-stopped
+
+  # ============================================
+  # 6. Valkey (Redis-совместимый) — key-value хранилище
+  # ============================================
+  valkey:
+    image: valkey/valkey:7.2
+    container_name: valkey_lab
+    ports:
+      - "6379:6379"
+    volumes:
+      - valkey_data:/data
+    networks:
+      - lab_network
+    restart: unless-stopped
+    command: valkey-server --appendonly yes --requirepass valkey123
+
+  # ============================================
+  # 7. Cassandra — колоночная распределённая БД
+  # ============================================
+  cassandra:
+    image: cassandra:5.0
+    container_name: cassandra_lab
+    environment:
+      - CASSANDRA_PASSWORD=cassandra123
+      - CASSANDRA_DC=dc1
+      - MAX_HEAP_SIZE=512M
+      - HEAP_NEWSIZE=128M
+    ports:
+      - "9042:9042"
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+      - ./init_cassandra:/docker-entrypoint-initdb.d
+    networks:
+      - lab_network
+    entrypoint: ["bash", "/docker-entrypoint-initdb.d/init.sh"]
+    restart: unless-stopped
+
+  # ============================================
+  # 8. Apache Spark с Jupyter Notebook
   # ============================================
   spark:
     image: jupyter/pyspark-notebook:latest
@@ -57,6 +128,7 @@ services:
     environment:
       - SPARK_DRIVER_OPTIONS=-Duser.timezone=UTC
       - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=admin
     ports:
       - "8888:8888"   # Jupyter Notebook
       - "4040:4040"   # Spark UI
@@ -64,11 +136,17 @@ services:
       - ./notebooks:/home/jovyan/work  # Ваши ноутбуки
       - ./jars:/home/jovyan/jars       # JDBC драйверы
       - ./mock_data:/home/jovyan/data  # CSV файлы
+      - ./init_spark/spark_init.sh:/home/jovyan/spark_init.sh  # Init-скрипт
     networks:
       - lab_network
     depends_on:
       - postgres
       - clickhouse
+      - mongodb
+      - neo4j
+      - valkey
+      - cassandra
+    entrypoint: ["bash", "/home/jovyan/spark_init.sh"]
     restart: unless-stopped
 # ============================================
 # Volumes (постоянное хранилище данных)
@@ -76,3 +154,7 @@ services:
 volumes:
   postgres_data:
   clickhouse_data:
+  mongodb_data:
+  neo4j_data:
+  valkey_data:
+  cassandra_data:

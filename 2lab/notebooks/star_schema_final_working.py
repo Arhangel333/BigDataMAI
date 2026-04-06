@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, year, month, dayofmonth, row_number, lit, to_date
+from pyspark.sql.functions import col, year, month, dayofmonth, row_number, lit, to_date, avg as _avg
 from pyspark.sql.window import Window
 
 print("=" * 60)
